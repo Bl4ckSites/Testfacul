@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Organizador Dinâmico - MTmanager Style</title>
+  <title>Organizador Dinâmico - Roger Bastos</title>
   <link rel="stylesheet" href="styles.css"> 
   <!-- Preload dos arquivos críticos -->
   <link rel="preload" href="styles.css" as="style">
@@ -28,7 +28,7 @@
     <ul>
       <li>
         ACESSO AO TEAMS
-        <!-- Aqui o botão Visualizar passa também o link de download direto -->
+        <!-- Botão Visualizar: passa o link direto para download -->
         <button onclick="openFile('teams.png', 'png', 'https://www.dropbox.com/scl/fi/n1xqk65sc1mcan73k4ule/teams.png?rlkey=64ej56mkqu241zv0brxy0bjxj&st=a2c6bw9f&dl=1')">Visualizar</button>
         <a href="https://www.dropbox.com/scl/fi/n1xqk65sc1mcan73k4ule/teams.png?rlkey=64ej56mkqu241zv0brxy0bjxj&st=a2c6bw9f&dl=1" download>Baixar</a>
       </li>
@@ -40,7 +40,7 @@
     </ul>
   </div>
 
-  <!-- Container para Grades (já implementado) -->
+  <!-- Container para Grades -->
   <div id="grades" class="content-container">
     <button class="back-btn">← Voltar</button>
     <h2>Grades</h2>
@@ -84,17 +84,18 @@
     <ul>
       <li>
         Sem avisos!!
-        <button onclick="openFile('aviso1.pdf', 'pdf')">Visualizar</button>
+        <button onclick="openFile('aviso1.pdf', 'pdf', 'aviso1.pdf')">Visualizar</button>
         <a href="aviso1.pdf" download>Baixar</a>
       </li>
     </ul>
   </div>
 
-  <!-- Modal para visualização ampliada de PDFs e imagens -->
+  <!-- Modal para visualização ampliada de arquivos (PDFs e imagens) -->
   <div class="modal-overlay" id="modalOverlay">
     <div class="modal-content">
       <button class="close-modal" id="closeModal">X</button>
       <div id="modalViewer"></div>
+      <!-- Botão de download: ao ser clicado, o navegador seguirá o link direto definido no atributo href -->
       <a id="downloadLink" class="download-icon" download>
         <svg width="24" height="24" viewBox="0 0 24 24">
           <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
@@ -118,7 +119,7 @@
       }
     });
 
-    // Função para exibir a seção desejada
+    // Exibir seção desejada
     function showSection(targetId) {
       document.querySelectorAll('.content-container').forEach(section => {
         section.classList.remove('active');
@@ -130,7 +131,7 @@
       document.getElementById('main-menu').style.display = 'none';
     }
 
-    // Voltar para o menu principal
+    // Botão Voltar: retorna ao menu principal
     document.querySelectorAll('.back-btn').forEach(btn => {
       btn.addEventListener('click', function() {
         document.querySelectorAll('.content-container').forEach(section => {
@@ -148,51 +149,22 @@
       });
     });
 
-    // Função para abrir o modal com o conteúdo do arquivo (PDF ou imagem)
-    // Agora aceita um terceiro parâmetro "downloadUrl" para configurar o link direto de download
+    // Função para abrir o modal com o conteúdo do arquivo e configurar o link de download diretamente
     function openFile(file, type, downloadUrl = file) {
       const modalOverlay = document.getElementById('modalOverlay');
       const modalViewer = document.getElementById('modalViewer');
       const downloadLink = document.getElementById('downloadLink');
 
+      // Exibe o conteúdo conforme o tipo (mantendo a visualização de PDF ou imagem)
       if(type === 'pdf') {
         modalViewer.innerHTML = '<iframe src="' + file + '" allowfullscreen></iframe>';
       } else {
         modalViewer.innerHTML = '<img src="' + file + '" alt="Visualização">';
       }
-      // Configura o link de download com o link direto (ex.: Dropbox com dl=1)
+      // Configura o link direto para download – sem lógica extra ou interceptação
       downloadLink.href = downloadUrl;
 
-      // Remove event listener anterior (caso exista) e adiciona o listener para o download
-      downloadLink.removeEventListener('click', handleDownload);
-      downloadLink.addEventListener('click', handleDownload);
-
       modalOverlay.style.display = 'flex';
-    }
-
-    // Função para tratar o clique no botão de download
-    function handleDownload(e) {
-      e.preventDefault();
-      e.stopPropagation();
-
-      const downloadLink = e.currentTarget;
-      const originalContent = downloadLink.innerHTML;
-
-      // Exibe o aviso "Baixando..."
-      downloadLink.innerHTML = "Baixando...";
-
-      // Cria um link temporário para forçar o download
-      const tempLink = document.createElement('a');
-      tempLink.href = downloadLink.href;
-      tempLink.setAttribute('download', '');
-      document.body.appendChild(tempLink);
-      tempLink.click();
-      document.body.removeChild(tempLink);
-
-      // Restaura o conteúdo original do botão após 2 segundos
-      setTimeout(() => {
-        downloadLink.innerHTML = originalContent;
-      }, 2000);
     }
 
     // Função para fechar o modal
@@ -213,11 +185,10 @@
       btn.addEventListener('click', function() {
         const imgSrc = this.getAttribute('data-img');
         const downloadUrl = this.getAttribute('data-download');
-        // Abre o modal para exibir a imagem da grade e configura o download correto
+        // Abre o modal para exibir a imagem e configura o download direto
         openFile(imgSrc, 'png', downloadUrl);
       });
     });
   </script>
- 
 </body>
 </html>
