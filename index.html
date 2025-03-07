@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Organizador Dinâmico - MTmanager Style</title>
+  <link rel="stylesheet" href="styles.css"> 
+  <!-- Preload dos arquivos críticos -->
+  <link rel="preload" href="styles.css" as="style">
+  <!-- Content Security Policy (ajuste as regras conforme seu ambiente e recursos) -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' https: data:; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;">
+</head>
+<body class="light-mode">
+  <!-- Botão para alternar modo -->
+  <button id="toggle-mode" class="toggle-mode">Modo Escuro</button>
+
+  <!-- Menu Principal -->
+  <div id="main-menu" class="menu">
+    <button class="menu-btn" data-target="info-basica">Informações Básicas</button>
+    <button class="menu-btn" data-target="grades">Grades</button>
+    <button class="menu-btn" data-target="avisos">Avisos</button>
+  </div>
+
+  <!-- Container para Informações Básicas -->
+  <div id="info-basica" class="content-container">
+    <button class="back-btn">← Voltar</button>
+    <h2>Informações Básicas</h2>
+    <ul>
+      <li>
+        ACESSO AO TEAMS
+        <!-- Aqui o botão Visualizar passa também o link de download direto -->
+        <button onclick="openFile('teams.png', 'png', 'https://www.dropbox.com/scl/fi/n1xqk65sc1mcan73k4ule/teams.png?rlkey=64ej56mkqu241zv0brxy0bjxj&st=a2c6bw9f&dl=1')">Visualizar</button>
+        <a href="https://www.dropbox.com/scl/fi/n1xqk65sc1mcan73k4ule/teams.png?rlkey=64ej56mkqu241zv0brxy0bjxj&st=a2c6bw9f&dl=1" download>Baixar</a>
+      </li>
+      <li>
+        ACESSO AO UNIMENSTRE
+        <button onclick="openFile('unimenstre.png', 'png', 'https://www.dropbox.com/scl/fi/gxf7l9lnorzzb5e5a4lxt/unimenstre.png?rlkey=tn2xuds9h0sjljdbc6n6fgbp1&st=4ayh68o8&dl=1')">Visualizar</button>
+        <a href="https://www.dropbox.com/scl/fi/gxf7l9lnorzzb5e5a4lxt/unimenstre.png?rlkey=tn2xuds9h0sjljdbc6n6fgbp1&st=4ayh68o8&dl=1" download>Baixar</a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Container para Grades (já implementado) -->
+  <div id="grades" class="content-container">
+    <button class="back-btn">← Voltar</button>
+    <h2>Grades</h2>
+    <div class="sub-menu">
+      <button class="sub-btn" data-target="direito" 
+              data-img="direito.png" 
+              data-download="https://www.dropbox.com/scl/fi/tctm433593fif4l9v7q2s/Direito.png?rlkey=pnpr87smw4d62ckg9cqkyezxb&st=1c4l747e&dl=1">Direito</button>
+      <button class="sub-btn" data-target="administracao" 
+              data-img="administracao.png" 
+              data-download="https://www.dropbox.com/scl/fi/pf08hxs7jhgf12122bkxs/Administra-o.png?rlkey=138j06da0ammky2zn0hft23bs&st=nap8fd3s&dl=1">Administração</button>
+      <button class="sub-btn" data-target="gestao-qualidade" 
+              data-img="gestao_qualidade.png" 
+              data-download="https://www.dropbox.com/scl/fi/75iin799ovu7poaprbllt/gestao_qualidade.png?rlkey=8uhy1o4gs9sg0dv7f8g4g4b6x&st=g8f5s57r&dl=1">Gestão da Qualidade</button>
+      <button class="sub-btn" data-target="gestao-financeira" 
+              data-img="gestao_financeira.png" 
+              data-download="https://www.dropbox.com/scl/fi/wax8upt4q2jilzz0xzl47/Gest-o-financeira.png?rlkey=8miv1nom2v93bf4rb7xzq9ngd&st=1m059zmw&dl=1">Gestão Financeira</button>
+      <button class="sub-btn" data-target="sistema-informacao" 
+              data-img="sistema_informacao.png" 
+              data-download="https://www.dropbox.com/scl/fi/9zxormsvlf3ll0k9d7qfe/Sistema-de-informa-o.png?rlkey=ugliukj537qtq065xb8vtdgen&st=eg6ckv1w&dl=1">Sistema de Informação</button>
+      <button class="sub-btn" data-target="logistica" 
+              data-img="logistica.png" 
+              data-download="https://www.dropbox.com/scl/fi/3832m7ae5nmi09ca02ye9/Log-stica.png?rlkey=0hvg711xfi5im398n92e4nfve&st=jd9fjejo&dl=1">Logística</button>
+      <button class="sub-btn" data-target="pedagogia" 
+              data-img="pedagogia.png" 
+              data-download="https://www.dropbox.com/scl/fi/iwphnocwro0cxdr1z52vg/Pedagogia.png?rlkey=0dtpq33176oz8y92t5jlrxago&st=o6ribtlp&dl=1">Pedagogia</button>
+    </div>
+    <!-- Conteúdo interno para cada grade -->
+    <div id="direito" class="inner-content hidden"></div>
+    <div id="administracao" class="inner-content hidden"></div>
+    <div id="gestao-qualidade" class="inner-content hidden"></div>
+    <div id="gestao-financeira" class="inner-content hidden"></div>
+    <div id="sistema-informacao" class="inner-content hidden"></div>
+    <div id="logistica" class="inner-content hidden"></div>
+    <div id="pedagogia" class="inner-content hidden"></div>
+  </div>
+
+  <!-- Container para Avisos -->
+  <div id="avisos" class="content-container">
+    <button class="back-btn">← Voltar</button>
+    <h2>Avisos</h2>
+    <ul>
+      <li>
+        Sem avisos!!
+        <button onclick="openFile('aviso1.pdf', 'pdf')">Visualizar</button>
+        <a href="aviso1.pdf" download>Baixar</a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Modal para visualização ampliada de PDFs e imagens -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-content">
+      <button class="close-modal" id="closeModal">X</button>
+      <div id="modalViewer"></div>
+      <a id="downloadLink" class="download-icon" download>
+        <svg width="24" height="24" viewBox="0 0 24 24">
+          <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+
+  <script>
+    // Alternar entre modo claro e escuro
+    document.getElementById('toggle-mode').addEventListener('click', function() {
+      const body = document.body;
+      if(body.classList.contains('light-mode')) {
+        body.classList.remove('light-mode');
+        body.classList.add('dark-mode');
+        this.textContent = 'Modo Claro';
+      } else {
+        body.classList.remove('dark-mode');
+        body.classList.add('light-mode');
+        this.textContent = 'Modo Escuro';
+      }
+    });
+
+    // Função para exibir a seção desejada
+    function showSection(targetId) {
+      document.querySelectorAll('.content-container').forEach(section => {
+        section.classList.remove('active');
+      });
+      const section = document.getElementById(targetId);
+      if(section) {
+        section.classList.add('active');
+      }
+      document.getElementById('main-menu').style.display = 'none';
+    }
+
+    // Voltar para o menu principal
+    document.querySelectorAll('.back-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.content-container').forEach(section => {
+          section.classList.remove('active');
+        });
+        document.getElementById('main-menu').style.display = 'block';
+      });
+    });
+
+    // Atribuir evento aos botões do menu principal
+    document.querySelectorAll('.menu-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const target = this.getAttribute('data-target');
+        showSection(target);
+      });
+    });
+
+    // Função para abrir o modal com o conteúdo do arquivo (PDF ou imagem)
+    // Agora aceita um terceiro parâmetro "downloadUrl" para configurar o link direto de download
+    function openFile(file, type, downloadUrl = file) {
+      const modalOverlay = document.getElementById('modalOverlay');
+      const modalViewer = document.getElementById('modalViewer');
+      const downloadLink = document.getElementById('downloadLink');
+
+      if(type === 'pdf') {
+        modalViewer.innerHTML = '<iframe src="' + file + '" allowfullscreen></iframe>';
+      } else {
+        modalViewer.innerHTML = '<img src="' + file + '" alt="Visualização">';
+      }
+      // Configura o link de download com o link direto (ex.: Dropbox com dl=1)
+      downloadLink.href = downloadUrl;
+
+      // Remove event listener anterior (caso exista) e adiciona o listener para o download
+      downloadLink.removeEventListener('click', handleDownload);
+      downloadLink.addEventListener('click', handleDownload);
+
+      modalOverlay.style.display = 'flex';
+    }
+
+    // Função para tratar o clique no botão de download
+    function handleDownload(e) {
+      e.preventDefault();
+      e.stopPropagation();
+
+      const downloadLink = e.currentTarget;
+      const originalContent = downloadLink.innerHTML;
+
+      // Exibe o aviso "Baixando..."
+      downloadLink.innerHTML = "Baixando...";
+
+      // Cria um link temporário para forçar o download
+      const tempLink = document.createElement('a');
+      tempLink.href = downloadLink.href;
+      tempLink.setAttribute('download', '');
+      document.body.appendChild(tempLink);
+      tempLink.click();
+      document.body.removeChild(tempLink);
+
+      // Restaura o conteúdo original do botão após 2 segundos
+      setTimeout(() => {
+        downloadLink.innerHTML = originalContent;
+      }, 2000);
+    }
+
+    // Função para fechar o modal
+    function closeModal() {
+      document.getElementById('modalOverlay').style.display = 'none';
+      document.getElementById('modalViewer').innerHTML = '';
+    }
+    document.getElementById('closeModal').addEventListener('click', closeModal);
+    // Fecha o modal ao clicar fora do conteúdo
+    document.getElementById('modalOverlay').addEventListener('click', function(e) {
+      if(e.target === this) {
+        closeModal();
+      }
+    });
+
+    // Evento para os botões de sub-menu (Grades)
+    document.querySelectorAll('.sub-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const imgSrc = this.getAttribute('data-img');
+        const downloadUrl = this.getAttribute('data-download');
+        // Abre o modal para exibir a imagem da grade e configura o download correto
+        openFile(imgSrc, 'png', downloadUrl);
+      });
+    });
+  </script>
+ 
+</body>
+</html>

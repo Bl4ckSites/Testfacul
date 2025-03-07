@@ -1,0 +1,609 @@
+/* Importar fontes: Open Sans para modo claro e Playfair Display para modo escuro */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap');
+
+/* Variáveis para cores e dimensões */
+:root {
+  --bg-claro: #f5f5f5;
+  --bg-escuro: #000;
+  --container-claro: #fff;
+  --container-claro-alt: #f0f0f0; /* Levemente mais escuro para diferenciar os contêineres */
+  --container-escuro: #333; /* Cinza bem escuro */
+  --cor-texto-claro: #000;
+  --cor-texto-escuro: #fff;
+  --borda-clara: 1px solid #000;
+  --btn-border-radius: 10px;
+  --container-border-radius: 10px;
+}
+
+/* Responsividade: fonte que cresce com o tamanho da tela */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Open Sans', sans-serif;
+  background-color: var(--bg-claro);
+  color: var(--cor-texto-claro);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Tamanho da fonte responsivo */
+  font-size: calc(16px + 0.5vw);
+}
+
+/* Garantir que imagens se ajustem responsivamente */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Modo Escuro: altera a fonte para uma opção mais charmosa e texto branco */
+body.dark-mode {
+  background-color: var(--bg-escuro);
+  color: var(--cor-texto-escuro);
+  font-family: 'Playfair Display', serif;
+}
+
+/* Botão de alternar modo */
+.toggle-mode {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  padding: 0.5em 1em;
+  cursor: pointer;
+  z-index: 100;
+  border-radius: var(--btn-border-radius);
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+/* Contêineres principais: Menu, seções e outros elementos */
+.container,
+.menu,
+.content-container {
+  width: 90%;
+  max-width: 800px;
+  margin: 1em auto;
+  padding: 1.5em;
+  border-radius: var(--container-border-radius);
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Menu Principal (#main-menu) - Centralizado vertical e horizontalmente */
+#main-menu {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--container-claro-alt);
+  border: var(--borda-clara);
+}
+
+/* Modo Escuro para o Menu Principal */
+body.dark-mode #main-menu {
+  background-color: var(--container-escuro);
+  border: 1px solid;
+  border-image: linear-gradient(90deg, red, green, blue) 1;
+}
+
+/* Seções de conteúdo (Informações Básicas, Grades, PDFs, Avisos) */
+/* Exibidas centralizadas na tela */
+.content-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--container-claro-alt);
+  border: var(--borda-clara);
+}
+
+/* Modo Escuro para as seções */
+body.dark-mode .content-container {
+  background-color: var(--container-escuro);
+  border: 1px solid;
+  border-image: linear-gradient(90deg, red, green, blue) 1;
+}
+
+/* Estilização dos botões: menu, sub-menu e voltar */
+.menu-btn, .sub-btn, .back-btn {
+  padding: 0.7em 1.2em;
+  margin: 0.5em;
+  border: none;
+  cursor: pointer;
+  font-size: 1em;
+  border-radius: var(--btn-border-radius);
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+/* Botões no modo claro */
+body.light-mode .menu-btn,
+body.light-mode .sub-btn,
+body.light-mode .back-btn {
+  background-color: var(--container-claro-alt);
+  color: var(--cor-texto-claro);
+  border: var(--borda-clara);
+}
+
+/* Botões no modo escuro */
+body.dark-mode .menu-btn,
+body.dark-mode .sub-btn,
+body.dark-mode .back-btn {
+  background-color: #000;
+  color: var(--cor-texto-escuro);
+  border: 1px solid var(--cor-texto-escuro);
+}
+
+/* Efeitos de hover e clique */
+.menu-btn:hover,
+.sub-btn:hover,
+.back-btn:hover,
+.toggle-mode:hover {
+  opacity: 0.8;
+}
+.menu-btn:active,
+.sub-btn:active,
+.back-btn:active,
+.toggle-mode:active {
+  transform: scale(0.95);
+}
+
+/* Layout do menu principal: centraliza os botões */
+.menu {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1em;
+}
+
+/* Layout para o sub-menu */
+.sub-menu {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1em;
+  margin: 1em 0;
+}
+
+/* Estilização das listas nas seções (PDFs, Avisos, Informações Básicas) */
+.content-container ul {
+  list-style: none;
+  padding: 0;
+}
+.content-container li {
+  margin: 1em 0;
+  padding: 1em;
+  border: var(--borda-clara);
+  border-radius: var(--container-border-radius);
+  transition: transform 0.2s;
+}
+
+/* Bordas das listas no modo escuro */
+body.dark-mode .content-container li {
+  border: 1px solid;
+  border-image: linear-gradient(90deg, red, green, blue) 1;
+}
+
+/* Links de download dentro das listas – aumento de margem para separar do texto */
+.content-container li a {
+  margin-left: 2em;
+  text-decoration: none;
+  padding: 0.5em 1em;
+  border-radius: var(--btn-border-radius);
+  border: var(--borda-clara);
+  color: var(--cor-texto-claro);
+}
+body.dark-mode .content-container li a {
+  border: 1px solid var(--cor-texto-escuro);
+  color: var(--cor-texto-escuro);
+}
+
+/* Impedir a seleção de texto na tela de "Informações Básicas" */
+#info-basica li {
+  user-select: none;
+}
+
+/* Modal: sobreposição para visualização de PDFs ou imagens */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.8);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Conteúdo do Modal */
+.modal-content {
+  background-color: var(--container-claro-alt);
+  padding: 1em;
+  border-radius: var(--container-border-radius);
+  position: relative;
+  width: 90%;
+  max-width: 800px;
+}
+body.dark-mode .modal-content {
+  background-color: var(--container-escuro);
+  border: 1px solid;
+  border-image: linear-gradient(90deg, red, green, blue) 1;
+}
+
+/* Botão para fechar o modal */
+.close-modal {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: #ccc;
+  border: none;
+  padding: 5px 10px;
+  border-radius: var(--btn-border-radius);
+  cursor: pointer;
+}
+
+/* Visualizadores (iframe para PDFs ou imagens) dentro do modal */
+#modalViewer iframe,
+#modalViewer img {
+  width: 100%;
+  height: 600px;
+  border: none;
+  border-radius: var(--container-border-radius);
+}
+
+/* Ícone/botão de download dentro do modal */
+.download-icon {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--container-claro-alt);
+  padding: 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  text-decoration: none;
+}
+body.dark-mode .download-icon {
+  background: var(--container-escuro);
+}
+
+/* Animações */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+@keyframes slideIn {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.fade-in {
+  animation: fadeIn 0.5s forwards;
+}
+.fade-out {
+  animation: fadeOut 0.5s forwards;
+}
+.slide-in {
+  animation: slideIn 0.5s forwards;
+}
+
+/* Responsividade: ajuste do layout para telas menores */
+@media (max-width: 768px) {
+  .menu, .sub-menu {
+    flex-direction: column;
+  }
+  #modalViewer iframe,
+  #modalViewer img {
+    height: 400px;
+  }
+}
+/* Estilo para exibir imagens no modal sem esticar e com borda branca */
+#modalViewer {
+  background-color: #fff; /* Define o fundo branco para as áreas sem imagem */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 600px; /* Altura fixa para o contêiner do modal */
+}
+
+#modalViewer img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain; /* Faz com que a imagem se ajuste sem perder a proporção */
+  border: none;
+}
+/* --------- Animações e Efeitos Adicionais --------- */
+
+/* Animação de pulsação para o efeito neon (modo claro) */
+@keyframes neonPulse {
+  0%, 100% {
+    box-shadow: 0 0 10px #00eaff, 0 0 20px #00eaff;
+  }
+  50% {
+    box-shadow: 0 0 20px #00eaff, 0 0 30px #00eaff;
+  }
+}
+
+/* Aplicar borda azul neon e animação de pulsação nos itens de lista (balões) no modo claro */
+body.light-mode .content-container li {
+  border: 2px solid #00eaff !important;
+  box-shadow: 0 0 10px #00eaff, 0 0 20px #00eaff;
+  animation: neonPulse 2s infinite;
+}
+
+/* Adicionar sombras RGB para os itens de lista (balões) no modo escuro */
+body.dark-mode .content-container li {
+  border: 1px solid;
+  border-image: linear-gradient(90deg, red, green, blue) 1;
+  box-shadow: 0 0 10px red, 0 0 20px green, 0 0 30px blue;
+}
+
+/* Efeito de glow nos botões (menu, sub-menu e voltar) quando em dark mode */
+@keyframes glow {
+  from {
+    box-shadow: 0 0 5px red, 0 0 10px green, 0 0 15px blue;
+  }
+  to {
+    box-shadow: 0 0 15px red, 0 0 25px green, 0 0 35px blue;
+  }
+}
+
+body.dark-mode .menu-btn:hover,
+body.dark-mode .sub-btn:hover,
+body.dark-mode .back-btn:hover {
+  animation: glow 1.5s infinite alternate;
+}
+/* Responsividade adicional para dispositivos móveis */
+@media (max-width: 768px) {
+  /* Ajusta o posicionamento do container de conteúdo para evitar problemas de corte
+     e permitir que a página role naturalmente em telas pequenas */
+  .content-container {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    margin: 20px auto;
+    width: 95%;
+    max-width: none;
+  }
+
+  /* Reorganiza os itens da lista para que o texto, o botão e o link fiquem
+     empilhados com um espaçamento adequado entre eles */
+  .content-container li {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px; /* espaçamento entre o texto, os botões e links */
+  }
+
+  /* Caso queira reforçar o espaçamento especificamente nos botões e links */
+  .content-container li button,
+  .content-container li a {
+    margin-top: 10px;
+    /* Se preferir que os botões ocupem a largura total, descomente a linha abaixo */
+    /* width: 100%; */
+  }
+}
+/* ============================= */
+/* Novos Estilos: Centralização, Responsividade e Animações */
+/* ============================= */
+
+/* Centraliza o conteúdo interno dos itens de lista */
+.content-container li {
+  text-align: center;
+}
+
+/* Força os botões e links dentro dos itens a ficarem centralizados */
+.content-container li button,
+.content-container li a {
+  display: inline-block;
+  margin: 10px auto; /* espaçamento superior/inferior e centralização horizontal */
+}
+
+/* Responsividade para telas muito grandes */
+@media (min-width: 1200px) {
+  .container,
+  .menu,
+  .content-container {
+    width: 70%;
+    max-width: 1000px;
+  }
+}
+
+/* Animação de surgimento para os contêineres */
+@keyframes containerAppear {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.content-container {
+  animation: containerAppear 0.8s ease-out;
+}
+
+/* Ajustes responsivos adicionais para dispositivos móveis */
+@media (max-width: 768px) {
+  /* Ajusta o posicionamento do contêiner para evitar sobreposição */
+  .content-container {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    margin: 20px auto;
+    width: 95%;
+    max-width: none;
+    padding: 1em;
+  }
+
+  /* Garante que os itens da lista fiquem empilhados centralizados */
+  .content-container li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px; /* espaçamento entre texto, botões e links */
+  }
+
+  .content-container li button,
+  .content-container li a {
+    width: auto; /* ou 100% se preferir botões em bloco */
+    margin: 10px auto;
+  }
+}
+/* Responsividade para telas pequenas (já existente e complementada) */
+@media (max-width: 768px) {
+  .content-container {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    margin: 20px auto;
+    width: 95%;
+    max-width: none;
+    padding: 1em;
+  }
+  
+  .content-container li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .content-container li button,
+  .content-container li a {
+    width: auto;
+    margin: 10px auto;
+  }
+}
+
+/* Responsividade para telas muito grandes */
+@media (min-width: 1200px) {
+  .container,
+  .menu,
+  .content-container {
+    width: 70%;
+    max-width: 1000px;
+  }
+}
+
+/* Animação de surgimento para os contêineres (dá mais vida ao carregamento) */
+@keyframes containerAppear {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.content-container {
+  animation: containerAppear 0.8s ease-out;
+}
+    /* Estilos para o layout geral e botões */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .menu {
+      padding: 10px;
+      background: #f2f2f2;
+      text-align: center;
+    }
+    .menu-btn {
+      margin: 5px;
+      padding: 10px 15px;
+      cursor: pointer;
+    }
+    .back-btn {
+      margin: 10px;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+    .content-container {
+      display: none;
+      padding: 20px;
+    }
+    .content-container.active {
+      display: block;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      margin-bottom: 15px;
+    }
+    button {
+      margin-right: 5px;
+    }
+
+    /* Estilos para modal (compartilhado entre imagens e PDFs) */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.8);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    .modal-content {
+      position: relative;
+      background: #fff;
+      padding: 10px;
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 8px;
+    }
+    #modalViewer iframe,
+    #modalViewer img {
+      width: 100%;
+      height: 600px;
+      border: none;
+    }
+    .download-icon {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #fff;
+      padding: 10px;
+      border-radius: 50%;
+      cursor: pointer;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      text-decoration: none;
+    }
+    .close-modal {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: #ccc;
+      border: none;
+      padding: 5px 10px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    /* Exemplo de estilo para modo escuro */
+    .light-mode {
+      background: #fff;
+      color: #000;
+    }
+    .dark-mode {
+      background: #121212;
+      color: #f2f2f2;
+    }
