@@ -90,12 +90,12 @@
     </ul>
   </div>
 
-  <!-- Modal para visualização ampliada de arquivos (PDFs e imagens) -->
+  <!-- Modal para visualização ampliada de arquivos -->
   <div class="modal-overlay" id="modalOverlay">
     <div class="modal-content">
       <button class="close-modal" id="closeModal">X</button>
       <div id="modalViewer"></div>
-      <!-- Botão de download: ao ser clicado, o navegador seguirá o link direto definido no atributo href -->
+      <!-- Botão de download que simplesmente possui o href definido -->
       <a id="downloadLink" class="download-icon" download>
         <svg width="24" height="24" viewBox="0 0 24 24">
           <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
@@ -119,7 +119,7 @@
       }
     });
 
-    // Exibir seção desejada
+    // Função para exibir a seção desejada
     function showSection(targetId) {
       document.querySelectorAll('.content-container').forEach(section => {
         section.classList.remove('active');
@@ -131,7 +131,7 @@
       document.getElementById('main-menu').style.display = 'none';
     }
 
-    // Botão Voltar: retorna ao menu principal
+    // Botões "Voltar" para retornar ao menu principal
     document.querySelectorAll('.back-btn').forEach(btn => {
       btn.addEventListener('click', function() {
         document.querySelectorAll('.content-container').forEach(section => {
@@ -141,7 +141,7 @@
       });
     });
 
-    // Atribuir evento aos botões do menu principal
+    // Evento para os botões do menu principal
     document.querySelectorAll('.menu-btn').forEach(btn => {
       btn.addEventListener('click', function() {
         const target = this.getAttribute('data-target');
@@ -149,21 +149,21 @@
       });
     });
 
-    // Função para abrir o modal com o conteúdo do arquivo e configurar o link de download diretamente
+    // Função para abrir o modal e configurar a visualização e o link de download
+    // O link é definido diretamente no atributo href do botão, sem manipulação
     function openFile(file, type, downloadUrl = file) {
       const modalOverlay = document.getElementById('modalOverlay');
       const modalViewer = document.getElementById('modalViewer');
       const downloadLink = document.getElementById('downloadLink');
-
-      // Exibe o conteúdo conforme o tipo (mantendo a visualização de PDF ou imagem)
+      
       if(type === 'pdf') {
         modalViewer.innerHTML = '<iframe src="' + file + '" allowfullscreen></iframe>';
       } else {
         modalViewer.innerHTML = '<img src="' + file + '" alt="Visualização">';
       }
-      // Configura o link direto para download – sem lógica extra ou interceptação
+      // Define o link direto para download
       downloadLink.href = downloadUrl;
-
+      
       modalOverlay.style.display = 'flex';
     }
 
@@ -173,6 +173,7 @@
       document.getElementById('modalViewer').innerHTML = '';
     }
     document.getElementById('closeModal').addEventListener('click', closeModal);
+    
     // Fecha o modal ao clicar fora do conteúdo
     document.getElementById('modalOverlay').addEventListener('click', function(e) {
       if(e.target === this) {
@@ -185,7 +186,6 @@
       btn.addEventListener('click', function() {
         const imgSrc = this.getAttribute('data-img');
         const downloadUrl = this.getAttribute('data-download');
-        // Abre o modal para exibir a imagem e configura o download direto
         openFile(imgSrc, 'png', downloadUrl);
       });
     });
