@@ -28,12 +28,14 @@
     <ul>
       <li>
         ACESSO AO TEAMS
-        <!-- O botão Visualizar abre o modal com a imagem e configura o download direto -->
+        <!-- Botão Visualizar: passa o link direto para download -->
         <button onclick="openFile('teams.png', 'png', 'https://www.dropbox.com/scl/fi/n1xqk65sc1mcan73k4ule/teams.png?rlkey=64ej56mkqu241zv0brxy0bjxj&st=a2c6bw9f&dl=1')">Visualizar</button>
+        <a href="https://www.dropbox.com/scl/fi/n1xqk65sc1mcan73k4ule/teams.png?rlkey=64ej56mkqu241zv0brxy0bjxj&st=a2c6bw9f&dl=1" download>Baixar</a>
       </li>
       <li>
         ACESSO AO UNIMENSTRE
         <button onclick="openFile('unimenstre.png', 'png', 'https://www.dropbox.com/scl/fi/gxf7l9lnorzzb5e5a4lxt/unimenstre.png?rlkey=tn2xuds9h0sjljdbc6n6fgbp1&st=4ayh68o8&dl=1')">Visualizar</button>
+        <a href="https://www.dropbox.com/scl/fi/gxf7l9lnorzzb5e5a4lxt/unimenstre.png?rlkey=tn2xuds9h0sjljdbc6n6fgbp1&st=4ayh68o8&dl=1" download>Baixar</a>
       </li>
     </ul>
   </div>
@@ -44,7 +46,7 @@
     <h2>Grades</h2>
     <div class="sub-menu">
       <button class="sub-btn" data-target="direito" 
-              data-img="direito.png" 
+              data-img="Direito.png" 
               data-download="https://www.dropbox.com/scl/fi/tctm433593fif4l9v7q2s/Direito.png?rlkey=pnpr87smw4d62ckg9cqkyezxb&st=1c4l747e&dl=1">Direito</button>
       <button class="sub-btn" data-target="administracao" 
               data-img="administracao.png" 
@@ -62,7 +64,7 @@
               data-img="logistica.png" 
               data-download="https://www.dropbox.com/scl/fi/3832m7ae5nmi09ca02ye9/Log-stica.png?rlkey=0hvg711xfi5im398n92e4nfve&st=jd9fjejo&dl=1">Logística</button>
       <button class="sub-btn" data-target="pedagogia" 
-              data-img="pedagogia.png" 
+              data-img="Pedagogia.png" 
               data-download="https://www.dropbox.com/scl/fi/iwphnocwro0cxdr1z52vg/Pedagogia.png?rlkey=0dtpq33176oz8y92t5jlrxago&st=o6ribtlp&dl=1">Pedagogia</button>
     </div>
     <!-- Conteúdo interno para cada grade -->
@@ -93,7 +95,7 @@
     <div class="modal-content">
       <button class="close-modal" id="closeModal">X</button>
       <div id="modalViewer"></div>
-      <!-- Botão de download: com href definido para o link direto -->
+      <!-- Botão de download que simplesmente possui o href definido -->
       <a id="downloadLink" class="download-icon" download>
         <svg width="24" height="24" viewBox="0 0 24 24">
           <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
@@ -147,7 +149,8 @@
       });
     });
 
-    // Função para abrir o modal e configurar a visualização e o link de download direto
+    // Função para abrir o modal e configurar a visualização e o link de download
+    // O link é definido diretamente no atributo href do botão, sem manipulação
     function openFile(file, type, downloadUrl = file) {
       const modalOverlay = document.getElementById('modalOverlay');
       const modalViewer = document.getElementById('modalViewer');
